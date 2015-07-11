@@ -10,4 +10,5 @@ type GameState interface {
 	Clone() GameState       // Clone the game state, a deep copy.
 	AvailableMoves() []Move // Return all the viable moves given the current game state. For a finished game, nil.
 	MakeMove(move Move)     // Take an action, changing the game state.
+	RandomizeUnknowns()     // Any game state that is unknown (like order of cards), randomize.
 }

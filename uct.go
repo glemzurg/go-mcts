@@ -39,6 +39,8 @@ func Uct(state GameState, iterations uint, simulations uint, ucbC float64, playe
 		// the move that created the child is.
 		var simulatedState GameState = node.state.Clone()
 		for j := 0; j < int(simulations); j++ {
+			// Randomize any part of the game state that is unkonwn to all the players (e.g. facedown cards).
+			simulatedState.RandomizeUnknowns()
 			// What moves can further the game state?
 			var availableMoves []Move = simulatedState.AvailableMoves()
 			// Is the game over?
