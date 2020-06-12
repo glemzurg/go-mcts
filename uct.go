@@ -10,11 +10,17 @@ import (
 	"sort"
 )
 
+type nilMove struct {}
+
+func (n nilMove) Probability() float64 {
+	return 0.0
+}
+
 // Uct is an Upper Confidence Bound Tree search through game stats for an optimal move, given a starting game state.
 func Uct(state GameState, iterations uint, simulations uint, ucbC float64, playerId uint64, scorer Scorer) Move {
 
 	// Find the best move given a fixed number of state explorations.
-	var root *treeNode = newTreeNode(nil, nil, state, ucbC)
+	var root *treeNode = newTreeNode(nil, nilMove{}, state, ucbC)
 	for i := 0; i < int(iterations); i++ {
 
 		// Start at the top of the tree again.
